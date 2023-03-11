@@ -152,8 +152,9 @@ const countries = [{
     }
 ];
 
-
-// let userName;
+const nameCountry = document.querySelector('.name__country');
+let userName;
+let randomIndex;
 
 // let write = setTimeout(() => {
 //     userName = prompt('Як тебе звати?');
@@ -169,3 +170,16 @@ const countries = [{
 //         console.log(userName);
 //     }
 // };
+
+// Випадковим чином вибираємо країну та відповідну їй столицю з масиву
+let findRandomIndex = (item) => {
+    randomIndex = Math.floor(Math.random() * item.length);
+}
+
+findRandomIndex(countries);
+
+let showRandomCountry = (country) => {
+    nameCountry.innerHTML = country;
+};
+
+showRandomCountry(countries[randomIndex].country)
