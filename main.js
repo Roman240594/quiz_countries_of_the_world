@@ -153,25 +153,27 @@ const countries = [{
 ];
 
 const nameCountry = document.querySelector('.name__country');
+const nameCapital = document.querySelectorAll('.answer');
+
 let userName;
 let randomIndex;
+let answersArray = [];
 
-// let write = setTimeout(() => {
-//     userName = prompt('Як тебе звати?');
-//     writeUserName();
-// }, 300);
+let write = setTimeout(() => {
+    userName = prompt('Як тебе звати?');
+    writeUserName();
+}, 300);
 
-// let writeUserName = () => {
-//     if (userName == null || userName == undefined || userName == '') {
-//         userName = 'Всезнайка';
-//         console.log(userName);
-//     } else {
-//         userName = userName;
-//         console.log(userName);
-//     }
-// };
+let writeUserName = () => {
+    if (userName == null || userName == undefined || userName == '') {
+        userName = 'Всезнайка';
+        console.log(userName);
+    } else {
+        userName = userName;
+        console.log(userName);
+    }
+};
 
-// Випадковим чином вибираємо країну та відповідну їй столицю з масиву
 let findRandomIndex = (item) => {
     randomIndex = Math.floor(Math.random() * item.length);
 }
@@ -182,4 +184,36 @@ let showRandomCountry = (country) => {
     nameCountry.innerHTML = country;
 };
 
-showRandomCountry(countries[randomIndex].country)
+showRandomCountry(countries[randomIndex].country);
+
+for (let i = 0; i < countries.length; i++) {
+    if (i === randomIndex) {
+        answersArray.push(countries[i].capital);
+    };
+};
+
+let getRandomCapital = () => {
+    for (let i = 0; i < 3; i++) {
+        randomIndex = Math.floor(Math.random() * countries.length);
+        answersArray.push(countries[randomIndex].capital);
+    }
+};
+
+getRandomCapital();
+
+let mixArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    };
+}
+
+mixArray(answersArray);
+
+let showCapitalInAnswers = () => {
+    for (i = 0; i < answersArray.length; i++) {
+        nameCapital[i].innerHTML = answersArray[i];
+    }
+};
+
+showCapitalInAnswers()
