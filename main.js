@@ -153,19 +153,19 @@ const countries = [{
 ];
 
 
-let userName;
+// let userName;
 
-let write = setTimeout(() => {
-    userName = prompt('Як тебе звати?');
-    writeUserName();
-}, 300);
+// let write = setTimeout(() => {
+//     userName = prompt('Як тебе звати?');
+//     writeUserName();
+// }, 300);
 
-let writeUserName = () => {
-    if (userName == null || userName == undefined || userName == '') {
-        userName = 'Всезнайка';
-        console.log(userName);
-    } else {
-        userName = userName;
-        console.log(userName);
-    }
-};
+// let writeUserName = () => {
+//     if (userName == null || userName == undefined || userName == '') {
+//         userName = 'Всезнайка';
+//         console.log(userName);
+//     } else {
+//         userName = userName;
+//         console.log(userName);
+//     }
+// };
