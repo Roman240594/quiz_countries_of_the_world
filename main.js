@@ -152,15 +152,20 @@ const countries = [{
     }
 ];
 
-const nameCountry = document.querySelector('.name__country');
 
-const randomIndex = Math.floor(Math.random() * countries.length);
+let userName;
 
-console.log(countries[randomIndex].country);
+let write = setTimeout(() => {
+    userName = prompt('Як тебе звати?');
+    writeUserName();
+}, 300);
 
-
-let showRandomCountry = (country) => {
-    nameCountry.innerHTML = country;
+let writeUserName = () => {
+    if (userName == null || userName == undefined || userName == '') {
+        userName = 'Всезнайка';
+        console.log(userName);
+    } else {
+        userName = userName;
+        console.log(userName);
+    }
 };
-
-showRandomCountry(countries[randomIndex].country)
