@@ -158,8 +158,9 @@ const incorrectMessages = ['Думай краще!', 'От халепа, нев�
 let nameCountry = document.querySelector('.name__country');
 let nameCapital = document.querySelectorAll('.answer');
 let message = document.querySelector('.result');
+let userName = document.querySelector('.userName');
 
-let userName;
+let user;
 let randomIndex;
 let checkComputerCountry;
 let checkComputerCapital;
@@ -169,20 +170,19 @@ let total = 0;
 let correctAnswers = 0;
 let incorrectAnswers = 0;
 
-// let write = setTimeout(() => {
-//     userName = prompt('Як тебе звати?');
-//     writeUserName();
-// }, 300);
+let write = setTimeout(() => {
+    user = prompt('Як тебе звати?');
+    writeUserName();
+}, 300);
 
-// let writeUserName = () => {
-//     if (userName == null || userName == undefined || userName == '') {
-//         userName = 'Незнайомець';
-//         console.log(userName);
-//     } else {
-//         userName = userName;
-//         console.log(userName);
-//     }
-// };
+let writeUserName = () => {
+    if (user == null || user == undefined || user == '') {
+        userName.innerHTML = 'Незнайомець';
+    } else {
+        userName.innerHTML = user;
+        console.log(userName);
+    }
+};
 
 let findRandomIndex = (item) => {
     randomIndex = Math.floor(Math.random() * item.length);
