@@ -153,7 +153,7 @@ const countries = [{
 ];
 
 const correctMessages = ['Правильно!', 'Молодець, так тримати!', 'Чудово, так продовжуй далі!', 'Та тут грає найрозумніша людина у світі!', 'Все правильно, не зупиняйся!'];
-const incorrectMessages = ['Думай краще!', 'От халепа, невірно!', 'Йой, та це не та столиця', 'Мабуть, тобі потрібно грати з атласом', 'От дідько, відповідь неправильна']
+const incorrectMessages = ['Думай краще!', 'От халепа, неправильно!', 'Йой, та це не та столиця', 'Мабуть, тобі потрібно грати з атласом', 'От дідько, відповідь неправильна']
 const level = ['Школяр', 'Студент коледжу', 'Ерудит', 'Інтелектуал', 'Всезнайко з географії', ]
 
 let nameCountry = document.querySelector('.name__country');
@@ -244,18 +244,14 @@ let startGame = () => {
     findRandomIndex(countries);
 
     showRandomCountry(countries[randomIndex].country);
-    console.log(checkComputerCountry);
 
     addCorrectAnswer(randomIndex);
 
     getRandomCapital(randomIndex);
 
     mixArray(answersArray);
-    console.log(answersArray);
 
     showCapitalInAnswers(answersArray);
-    console.log(correctAnswers);
-    console.log(incorrectAnswers);
 };
 
 let chooseAnswer = () => {
@@ -279,13 +275,7 @@ let chooseAnswer = () => {
             total++;
             showResult(totalQuestion, total);
 
-            // if (correctAnswers < 5) {
-            //     showResult(userLevel, level[0])
-            // } else if (correctAnswers > 5 && correctAnswers < 10) {
-            //     showResult(userLevel, level[1])
-            // }
-
-            let writeLevel = (correctAnswers < 5) ? showResult(userLevel, level[0]) :
+            (correctAnswers < 5) ? showResult(userLevel, level[0]):
                 (correctAnswers >= 5 && correctAnswers < 10) ? showResult(userLevel, level[1]) :
                 (correctAnswers >= 10 && correctAnswers < 15) ? showResult(userLevel, level[2]) :
                 (correctAnswers >= 15 && correctAnswers < 25) ? showResult(userLevel, level[3]) : showResult(userLevel, level[4]);

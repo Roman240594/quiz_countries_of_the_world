@@ -65,7 +65,6 @@ body {
     color: #444;
     font-size: 22px;
     width: 600px;
-    height: 50.4px;
     margin: 20px;
     padding: 10px;
     text-align: center;
@@ -125,4 +124,97 @@ body {
 .resultIncorrect {
     padding-top: 10px;
     color: #ef4b4b;
+}
+
+@media (max-width: 770px) {
+    .title {
+        font-size: 32px;
+        padding: 30px 0 20px;
+    }
+    .question {
+        font-size: 20px;
+    }
+    .answers {
+        padding: 15px 0px;
+    }
+    .answer {
+        margin: 10px;
+        font-size: 20px;
+    }
+    #result {
+        height: 80px;
+    }
+    .correct,
+    .incorrect {
+        height: 80px;
+        font-size: 20px;
+    }
+    .results {
+        padding-top: 20px;
+    }
+}
+
+@media (max-width: 430px) {
+    .title {
+        font-size: 30px;
+        padding: 27px 0 18px;
+    }
+    .question {
+        font-size: 18px;
+    }
+    .answers {
+        padding: 13px 0px;
+    }
+    .answer {
+        margin: 10px;
+        font-size: 18px;
+    }
+    .answer:hover {
+        background-color: #fff;
+        color: #444;
+    }
+    .answer:active {
+        background-color: #9f9a9abd;
+        color: #fff;
+    }
+    #result {
+        height: 70px;
+    }
+    .correct,
+    .incorrect {
+        height: 70px;
+        font-size: 18px;
+    }
+    .results {
+        padding-top: 20px;
+    }
+}
+
+@media (max-width: 380px) {
+    .title {
+        font-size: 22px;
+        padding: 20px 0 15px;
+    }
+    .question {
+        font-size: 18px;
+    }
+    .answers {
+        padding: 12px 0px;
+    }
+    .answer {
+        margin: 8px;
+        font-size: 15px;
+    }
+    #result {
+        height: 65px;
+    }
+    .correct,
+    .incorrect {
+        height: 65px;
+        font-size: 15px;
+    }
+    .results {
+        padding-top: 20px;
+        font-size: 12px;
+    }
 }
