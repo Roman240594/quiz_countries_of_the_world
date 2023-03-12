@@ -152,6 +152,9 @@ const countries = [{
     }
 ];
 
+const correctMessages = ['Правильно!', 'Молодець, так тримати!', 'Чудово, так продовжуй далі!', 'Та тут грає найрозумніша людина у світі!', 'Все правильно, не зупиняйся!'];
+const incorrectMessages = ['Думай краще!', 'От халепа, невірно!', 'Йой, та це не та столиця', 'Мабуть, тобі потрібно грати з атласом', 'От дідько, відповідь неправильна']
+
 let nameCountry = document.querySelector('.name__country');
 let nameCapital = document.querySelectorAll('.answer');
 let message = document.querySelector('.result');
@@ -251,11 +254,13 @@ let chooseAnswer = () => {
     nameCapital.forEach((answer) => {
         answer.addEventListener('click', () => {
             if (checkComputerCapital === answer.textContent) {
-                message.innerText = 'Правильно!';
+                mixArray(correctMessages);
+                message.innerText = correctMessages[0];
                 message.className = "correct";
                 correctAnswers++;
             } else {
-                message.innerText = 'От халепа, невірно!';
+                mixArray(incorrectMessages);
+                message.innerText = incorrectMessages[0];
                 message.className = "incorrect";
                 incorrectAnswers++
             };
@@ -266,8 +271,7 @@ let chooseAnswer = () => {
                 message.innerText = '';
                 message.classList.remove("correct");
                 message.classList.remove("incorrect");
-            }, 1000);
-
+            }, 1800);
         });
     })
 };
