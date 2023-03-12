@@ -19,7 +19,7 @@ const countries = [{
         capital: "Берлін"
     },
     {
-        country: "Великобританія",
+        country: "Велика Британія",
         capital: "Лондон"
     },
     {
@@ -68,7 +68,7 @@ const countries = [{
     },
     {
         country: "Білорусь",
-        capital: "Мінск"
+        capital: "Мінськ"
     },
     {
         country: "Данія",
@@ -159,6 +159,9 @@ let nameCountry = document.querySelector('.name__country');
 let nameCapital = document.querySelectorAll('.answer');
 let message = document.querySelector('.result');
 let userName = document.querySelector('.userName');
+let totalQuestion = document.querySelector('.resultsQuestions__number');
+let totalCorrectAnswers = document.querySelector('.resultCorrect__number');
+let totalIncorrectAnswers = document.querySelector('.resultIncorrect__number');
 
 let user;
 let randomIndex;
@@ -230,8 +233,11 @@ let cleanArray = (array) => {
     array.length = 0;
 };
 
+let showResult = (player, score) => {
+    player.innerHTML = score;
+}
+
 let startGame = () => {
-    // ++total;
 
     findRandomIndex(countries);
 
@@ -258,13 +264,18 @@ let chooseAnswer = () => {
                 message.innerText = correctMessages[0];
                 message.className = "correct";
                 correctAnswers++;
+                showResult(totalCorrectAnswers, correctAnswers);
             } else {
                 mixArray(incorrectMessages);
                 message.innerText = incorrectMessages[0];
                 message.className = "incorrect";
-                incorrectAnswers++
+                incorrectAnswers++;
+                showResult(totalIncorrectAnswers, incorrectAnswers);
             };
             cleanArray(answersArray);
+            total++;
+
+            showResult(totalQuestion, total);
 
             let newRound = setTimeout(() => {
                 startGame();
