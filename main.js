@@ -152,68 +152,116 @@ const countries = [{
     }
 ];
 
-const nameCountry = document.querySelector('.name__country');
-const nameCapital = document.querySelectorAll('.answer');
+let nameCountry = document.querySelector('.name__country');
+let nameCapital = document.querySelectorAll('.answer');
 
 let userName;
 let randomIndex;
+let checkComputerCountry;
+let checkComputerCapital;
 let answersArray = [];
 
-let write = setTimeout(() => {
-    userName = prompt('Як тебе звати?');
-    writeUserName();
-}, 300);
+let total = 0;
+let correctAnswers = 0;
+let incorrectAnswers = 0;
 
-let writeUserName = () => {
-    if (userName == null || userName == undefined || userName == '') {
-        userName = 'Всезнайка';
-        console.log(userName);
-    } else {
-        userName = userName;
-        console.log(userName);
-    }
-};
+// let write = setTimeout(() => {
+//     userName = prompt('Як тебе звати?');
+//     writeUserName();
+// }, 300);
+
+// let writeUserName = () => {
+//     if (userName == null || userName == undefined || userName == '') {
+//         userName = 'Незнайомець';
+//         console.log(userName);
+//     } else {
+//         userName = userName;
+//         console.log(userName);
+//     }
+// };
 
 let findRandomIndex = (item) => {
     randomIndex = Math.floor(Math.random() * item.length);
-}
-
-findRandomIndex(countries);
+};
 
 let showRandomCountry = (country) => {
     nameCountry.innerHTML = country;
+    checkComputerCountry = country;
 };
 
-showRandomCountry(countries[randomIndex].country);
-
-for (let i = 0; i < countries.length; i++) {
-    if (i === randomIndex) {
-        answersArray.push(countries[i].capital);
+let addCorrectAnswer = (randomIndex) => {
+    for (let i = 0; i < countries.length; i++) {
+        if (i === randomIndex) {
+            answersArray.push(countries[i].capital);
+            checkComputerCapital = countries[i].capital;
+        }
     };
 };
 
-let getRandomCapital = () => {
+let getRandomCapital = (randomIndex) => {
     for (let i = 0; i < 3; i++) {
         randomIndex = Math.floor(Math.random() * countries.length);
         answersArray.push(countries[randomIndex].capital);
     }
 };
 
-getRandomCapital();
-
 let mixArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
         let j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     };
-}
+};
 
-mixArray(answersArray);
-
-let showCapitalInAnswers = () => {
-    for (i = 0; i < answersArray.length; i++) {
-        nameCapital[i].innerHTML = answersArray[i];
+let showCapitalInAnswers = (array) => {
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < nameCapital.length; j++) {
+            if (i === j) {
+                nameCapital[j].innerHTML = array[i];
+            }
+        }
     }
 };
 
-showCapitalInAnswers()
+let cleanArray = (array) => {
+    array.length = 0;
+};
+
+let startGame = () => {
+    // ++total;
+
+    findRandomIndex(countries);
+
+    showRandomCountry(countries[randomIndex].country);
+    console.log(checkComputerCountry);
+
+    addCorrectAnswer(randomIndex);
+
+    getRandomCapital(randomIndex);
+
+    mixArray(answersArray);
+    console.log(answersArray);
+
+    showCapitalInAnswers(answersArray);
+    console.log(correctAnswers);
+    console.log(incorrectAnswers);
+};
+
+let chooseAnswer = () => {
+    nameCapital.forEach((answer) => {
+        answer.addEventListener('click', () => {
+            if (checkComputerCapital === answer.textContent) {
+                console.log("ok");
+                correctAnswers++;
+            } else {
+                console.log('not');
+                incorrectAnswers++
+            };
+            cleanArray(answersArray);
+            startGame();
+        });
+    })
+};
+
+chooseAnswer();
+
+window.onload = startGame();
