@@ -77,3 +77,28 @@ body {
     color: #fff;
     cursor: pointer;
 }
+
+.result {
+    height: 110px;
+}
+
+.correct {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 25px;
+    padding: 20px 0px;
+    background-color: #30cf6a;
+}
+
+.incorrect {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 25px;
+    padding: 20px 0px;
+    border-radius: 20px;
+    background-color: #ef4b4b;
+}

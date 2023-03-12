@@ -154,6 +154,7 @@ const countries = [{
 
 let nameCountry = document.querySelector('.name__country');
 let nameCapital = document.querySelectorAll('.answer');
+let message = document.querySelector('.result');
 
 let userName;
 let randomIndex;
@@ -250,14 +251,23 @@ let chooseAnswer = () => {
     nameCapital.forEach((answer) => {
         answer.addEventListener('click', () => {
             if (checkComputerCapital === answer.textContent) {
-                console.log("ok");
+                message.innerText = 'Правильно!';
+                message.className = "correct";
                 correctAnswers++;
             } else {
-                console.log('not');
+                message.innerText = 'От халепа, невірно!';
+                message.className = "incorrect";
                 incorrectAnswers++
             };
             cleanArray(answersArray);
-            startGame();
+
+            let newRound = setTimeout(() => {
+                startGame();
+                message.innerText = '';
+                message.classList.remove("correct");
+                message.classList.remove("incorrect");
+            }, 1000);
+
         });
     })
 };
