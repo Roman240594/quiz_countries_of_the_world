@@ -156,6 +156,7 @@ const correctMessages = ['Правильно!', 'Молодець, так три
 const incorrectMessages = ['Думай краще!', 'От халепа, неправильно!', 'Йой, та це не та столиця', 'Мабуть, тобі потрібно грати з атласом', 'От дідько, відповідь неправильна']
 const level = ['Школяр', 'Студент коледжу', 'Ерудит', 'Інтелектуал', 'Всезнайко з географії', ]
 
+let wrapper = document.querySelector('.wrapper')
 let nameCountry = document.querySelector('.name__country');
 let nameCapital = document.querySelectorAll('.answer');
 let message = document.querySelector('.result');
@@ -164,6 +165,7 @@ let totalQuestion = document.querySelector('.resultsQuestions__number');
 let totalCorrectAnswers = document.querySelector('.resultCorrect__number');
 let totalIncorrectAnswers = document.querySelector('.resultIncorrect__number');
 let userLevel = document.querySelector('.results__level');
+let popup = document.querySelector('.popup');
 
 let user;
 let randomIndex;
@@ -251,7 +253,19 @@ let showResult = (player, score) => {
     player.innerHTML = score;
 }
 
+let showPopUp = () => {
+    console.log(total);
+    if (total === 2) {
+        wrapper.className = 'hidden';
+        popup.className = 'popup__visible';
+        (correctAnswers < 10) ? popup.innerHTML = `Ти відповів правильно на ${correctAnswers} з ${total} питань.<br>Тобі потрібно краще вивчити столиці країн Європи`:
+            (correctAnswers >= 10 && correctAnswers < 20) ? popup.innerHTML = `Ти відповів правильно на ${correctAnswers} з ${total} питань.<br>Хороший результат, але я думаю ти зможеш краще` :
+            (correctAnswers >= 15 && correctAnswers < 25) ? popup.innerHTML = `Ти відповів правильно на ${correctAnswers} з ${total} питань.<br>Чудово! Ще трішки практики і ти будеш знати всі столиці Європи` : popup.innerHTML = `Ти відповів правильно на ${correctAnswers} з ${total} питань.<br>Ти бездоганно знаєш всі столиці Європи!`;
+    }
+}
+
 let startGame = () => {
+    showPopUp();
     nameCapital.forEach((element) => {
         element.style.pointerEvents = 'auto';
         element.style.opacity = '1';
@@ -306,7 +320,6 @@ let chooseAnswer = () => {
                 (correctAnswers >= 5 && correctAnswers < 10) ? showResult(userLevel, level[1]) :
                 (correctAnswers >= 10 && correctAnswers < 15) ? showResult(userLevel, level[2]) :
                 (correctAnswers >= 15 && correctAnswers < 25) ? showResult(userLevel, level[3]) : showResult(userLevel, level[4]);
-
 
             let newRound = setTimeout(() => {
                 startGame();
