@@ -198,21 +198,32 @@ let showRandomCountry = (country) => {
     checkComputerCountry = country;
 };
 
-let addCorrectAnswer = (randomIndex) => {
+let addAnswers = (randomIndex) => {
     for (let i = 0; i < countries.length; i++) {
         if (i === randomIndex) {
             answersArray.push(countries[i].capital);
             checkComputerCapital = countries[i].capital;
         }
     };
-};
-
-let getRandomCapital = (randomIndex) => {
     for (let i = 0; i < 3; i++) {
         randomIndex = Math.floor(Math.random() * countries.length);
         answersArray.push(countries[randomIndex].capital);
     }
 };
+
+let repeatCreateAnswers = (randomIndex, answersArray) => {
+    cleanArray(answersArray)
+    addAnswers(randomIndex);
+    mixArray(answersArray);
+    showCapitalInAnswers(answersArray);
+}
+
+let hasDublicateCapital = (array) => {
+    if (new Set(array).size !== array.length) {
+        repeatCreateAnswers(randomIndex, answersArray);
+        // console.log(answersArray);
+    };
+}
 
 let mixArray = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
@@ -245,9 +256,10 @@ let startGame = () => {
 
     showRandomCountry(countries[randomIndex].country);
 
-    addCorrectAnswer(randomIndex);
+    addAnswers(randomIndex);
+    // console.log(answersArray);
 
-    getRandomCapital(randomIndex);
+    hasDublicateCapital(answersArray);
 
     mixArray(answersArray);
 
