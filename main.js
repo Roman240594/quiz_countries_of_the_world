@@ -256,12 +256,18 @@ let showResult = (player, score) => {
 let showPopUp = () => {
     console.log(total);
     if (total === 2) {
-        wrapper.className = 'hidden';
-        popup.className = 'popup__visible';
-        (correctAnswers < 10) ? popup.innerHTML = `Ти відповів правильно на ${correctAnswers} з ${total} питань.<br>Тобі потрібно краще вивчити столиці країн Європи`:
-            (correctAnswers >= 10 && correctAnswers < 20) ? popup.innerHTML = `Ти відповів правильно на ${correctAnswers} з ${total} питань.<br>Хороший результат, але я думаю ти зможеш краще` :
-            (correctAnswers >= 15 && correctAnswers < 25) ? popup.innerHTML = `Ти відповів правильно на ${correctAnswers} з ${total} питань.<br>Чудово! Ще трішки практики і ти будеш знати всі столиці Європи` : popup.innerHTML = `Ти відповів правильно на ${correctAnswers} з ${total} питань.<br>Ти бездоганно знаєш всі столиці Європи!`;
+        wrapper.classList.add('hidden');
+        popup.classList.remove('hidden')
+        popup.classList.add('popup__visible');
+        (correctAnswers < 10) ? popup.innerHTML = `Ти відповів правильно на ${correctAnswers} з ${total} питань.<br>Тобі потрібно краще вивчити столиці країн Європи.<br><br>Хочеш зіграти ще раз?<br><br>`:
+            (correctAnswers >= 10 && correctAnswers < 20) ? popup.innerHTML = `Ти відповів правильно на ${correctAnswers} з ${total} питань.<br>Хороший результат, але я думаю ти зможеш краще.<br><br>Хочеш зіграти ще раз?<br><br>` :
+            (correctAnswers >= 15 && correctAnswers < 25) ? popup.innerHTML = `Ти відповів правильно на ${correctAnswers} з ${total} питань.<br>Чудово! Ще трішки практики і ти будеш знати всі столиці Європи.<br><br>Хочеш зіграти ще раз?<br><br>` : popup.innerHTML = `Ти відповів правильно на ${correctAnswers} з ${total} питань.<br>Ти бездоганно знаєш всі столиці Європи!<br><br>Хочеш зіграти ще раз?<br><br>`;
+        const button = document.createElement('button');
+        button.textContent = 'Так!';
+        button.className = 'button';
+        popup.appendChild(button);
     }
+
 }
 
 let startGame = () => {
