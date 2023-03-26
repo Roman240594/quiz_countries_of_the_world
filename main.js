@@ -175,19 +175,19 @@ let total = 0;
 let correctAnswers = 0;
 let incorrectAnswers = 0;
 
-let write = setTimeout(() => {
-    user = prompt('Як тебе звати?');
-    writeUserName();
-}, 300);
+// let write = setTimeout(() => {
+//     user = prompt('Як тебе звати?');
+//     writeUserName();
+// }, 300);
 
-let writeUserName = () => {
-    if (user == null || user == undefined || user == '') {
-        userName.innerHTML = 'Незнайомець';
-    } else {
-        userName.innerHTML = user;
-        console.log(userName);
-    }
-};
+// let writeUserName = () => {
+//     if (user == null || user == undefined || user == '') {
+//         userName.innerHTML = 'Незнайомець';
+//     } else {
+//         userName.innerHTML = user;
+//         console.log(userName);
+//     }
+// };
 
 let findRandomIndex = (item) => {
     randomIndex = Math.floor(Math.random() * item.length);
@@ -214,14 +214,15 @@ let addAnswers = (randomIndex) => {
 let repeatCreateAnswers = (randomIndex, answersArray) => {
     cleanArray(answersArray)
     addAnswers(randomIndex);
+    hasDublicateCapital(answersArray);
     mixArray(answersArray);
     showCapitalInAnswers(answersArray);
 }
 
 let hasDublicateCapital = (array) => {
     if (new Set(array).size !== array.length) {
+        console.log('repeat');
         repeatCreateAnswers(randomIndex, answersArray);
-        // console.log(answersArray);
     };
 }
 
@@ -251,13 +252,17 @@ let showResult = (player, score) => {
 }
 
 let startGame = () => {
+    nameCapital.forEach((element) => {
+        element.style.pointerEvents = 'auto';
+        element.style.opacity = '1';
+    })
 
     findRandomIndex(countries);
 
     showRandomCountry(countries[randomIndex].country);
 
     addAnswers(randomIndex);
-    // console.log(answersArray);
+    console.log(answersArray);
 
     hasDublicateCapital(answersArray);
 
@@ -265,6 +270,13 @@ let startGame = () => {
 
     showCapitalInAnswers(answersArray);
 };
+
+let disabledButtons = (array) => {
+    array.forEach((element) => {
+        element.style.pointerEvents = 'none';
+        element.style.opacity = '0.7';
+    })
+}
 
 let chooseAnswer = () => {
     nameCapital.forEach((answer) => {
@@ -282,6 +294,9 @@ let chooseAnswer = () => {
                 incorrectAnswers++;
                 showResult(totalIncorrectAnswers, incorrectAnswers);
             };
+
+            disabledButtons(nameCapital);
+
             cleanArray(answersArray);
 
             total++;
@@ -291,6 +306,7 @@ let chooseAnswer = () => {
                 (correctAnswers >= 5 && correctAnswers < 10) ? showResult(userLevel, level[1]) :
                 (correctAnswers >= 10 && correctAnswers < 15) ? showResult(userLevel, level[2]) :
                 (correctAnswers >= 15 && correctAnswers < 25) ? showResult(userLevel, level[3]) : showResult(userLevel, level[4]);
+
 
             let newRound = setTimeout(() => {
                 startGame();
