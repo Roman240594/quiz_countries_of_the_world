@@ -126,23 +126,6 @@ body {
     color: #ef4b4b;
 }
 
-button {
-    display: block;
-    margin: 0 auto;
-    padding: 10px 20px;
-    background-color: #ccc;
-    color: #000;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-}
-
-button:hover {
-    background-color: #ccc;
-    color: #fff;
-}
-
 .popup__visible {
     position: fixed;
     z-index: 999;

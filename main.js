@@ -166,6 +166,7 @@ let totalCorrectAnswers = document.querySelector('.resultCorrect__number');
 let totalIncorrectAnswers = document.querySelector('.resultIncorrect__number');
 let userLevel = document.querySelector('.results__level');
 let popup = document.querySelector('.popup');
+const button = document.createElement('button');
 
 let user;
 let randomIndex;
@@ -177,19 +178,18 @@ let total = 0;
 let correctAnswers = 0;
 let incorrectAnswers = 0;
 
-// let write = setTimeout(() => {
-//     user = prompt('Як тебе звати?');
-//     writeUserName();
-// }, 300);
+let write = setTimeout(() => {
+    user = prompt('Як тебе звати?');
+    writeUserName();
+}, 300);
 
-// let writeUserName = () => {
-//     if (user == null || user == undefined || user == '') {
-//         userName.innerHTML = 'Незнайомець';
-//     } else {
-//         userName.innerHTML = user;
-//         console.log(userName);
-//     }
-// };
+let writeUserName = () => {
+    if (user == null || user == undefined || user == '') {
+        userName.innerHTML = 'Незнайомець';
+    } else {
+        userName.innerHTML = user;
+    }
+};
 
 let findRandomIndex = (item) => {
     randomIndex = Math.floor(Math.random() * item.length);
@@ -223,7 +223,6 @@ let repeatCreateAnswers = (randomIndex, answersArray) => {
 
 let hasDublicateCapital = (array) => {
     if (new Set(array).size !== array.length) {
-        console.log('repeat');
         repeatCreateAnswers(randomIndex, answersArray);
     };
 }
@@ -254,23 +253,21 @@ let showResult = (player, score) => {
 }
 
 let showPopUp = () => {
-    console.log(total);
-    if (total === 2) {
+    if (total === 26) {
         wrapper.classList.add('hidden');
-        popup.classList.remove('hidden')
+        popup.classList.remove('hidden');
         popup.classList.add('popup__visible');
-        (correctAnswers < 10) ? popup.innerHTML = `Ти відповів правильно на ${correctAnswers} з ${total} питань.<br>Тобі потрібно краще вивчити столиці країн Європи.<br><br>Хочеш зіграти ще раз?<br><br>`:
-            (correctAnswers >= 10 && correctAnswers < 20) ? popup.innerHTML = `Ти відповів правильно на ${correctAnswers} з ${total} питань.<br>Хороший результат, але я думаю ти зможеш краще.<br><br>Хочеш зіграти ще раз?<br><br>` :
-            (correctAnswers >= 15 && correctAnswers < 25) ? popup.innerHTML = `Ти відповів правильно на ${correctAnswers} з ${total} питань.<br>Чудово! Ще трішки практики і ти будеш знати всі столиці Європи.<br><br>Хочеш зіграти ще раз?<br><br>` : popup.innerHTML = `Ти відповів правильно на ${correctAnswers} з ${total} питань.<br>Ти бездоганно знаєш всі столиці Європи!<br><br>Хочеш зіграти ще раз?<br><br>`;
-        const button = document.createElement('button');
-        button.textContent = 'Так!';
-        button.className = 'button';
-        popup.appendChild(button);
+        (correctAnswers < 10) ? popup.innerHTML = `Ти відповів правильно на ${correctAnswers} з ${total} питань.<br>Тобі потрібно краще вивчити столиці країн Європи.<br><br>Якщо хочеш зіграти ще раз - перезавантаж сторінку<br><br>`:
+            (correctAnswers >= 10 && correctAnswers < 20) ? popup.innerHTML = `Ти відповів правильно на ${correctAnswers} з ${total} питань.<br>Хороший результат, але я думаю ти зможеш краще.<br><br>Якщо хочеш зіграти ще раз - перезавантаж сторінку<br><br>` :
+            (correctAnswers >= 15 && correctAnswers < 25) ? popup.innerHTML = `Ти відповів правильно на ${correctAnswers} з ${total} питань.<br>Чудово! Ще трішки практики і ти будеш знати всі столиці Європи.<br><br>Якщо хочеш зіграти ще раз - перезавантаж сторінку<br><br>` : popup.innerHTML = `Ти відповів правильно на ${correctAnswers} з ${total} питань.<br>Ти бездоганно знаєш всі столиці Європи!<br><br>Якщо хочеш зіграти ще раз - перезавантаж сторінку<br><br>`;
     }
-
 }
 
 let startGame = () => {
+
+    wrapper.classList.remove('hidden');
+    popup.classList.remove('popup__visible');
+
     showPopUp();
     nameCapital.forEach((element) => {
         element.style.pointerEvents = 'auto';
@@ -282,7 +279,6 @@ let startGame = () => {
     showRandomCountry(countries[randomIndex].country);
 
     addAnswers(randomIndex);
-    console.log(answersArray);
 
     hasDublicateCapital(answersArray);
 
@@ -321,6 +317,8 @@ let chooseAnswer = () => {
 
             total++;
             showResult(totalQuestion, total);
+
+            console.log(total);
 
             (correctAnswers < 5) ? showResult(userLevel, level[0]):
                 (correctAnswers >= 5 && correctAnswers < 10) ? showResult(userLevel, level[1]) :
